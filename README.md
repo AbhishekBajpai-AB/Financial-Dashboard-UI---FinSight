@@ -17,11 +17,25 @@ A comprehensive, responsive financial dashboard built with React and Vite. It pr
 - **Simulated Roles**: Switch between *Admin* (full access) and *Viewer* (read-only) roles seamlessly.
 - **Dark & Light Themes**: State-of-the-art UI supporting dynamic theme switching.
 
-## Snpashot
+## Overview
 
 <div align="center">
-  <img src="./snapshot/Overview.png" alt="Overview" width="45%"/>
+  <img src="src/snapshot/Overview.png" alt="Overview" width="95%"/>       
 </div>
+
+
+## Transaction - Admin Role
+
+<div align="center">
+  <img src="src/snapshot/Overview.png" alt="Overview" width="95%"/>       
+</div>
+
+## Transaction - Viewer Role
+
+<div align="center">
+  <img src="src/snapshot/Overview.png" alt="Overview" width="95%"/>       
+</div>
+
 
 ## Tech Stack
 
