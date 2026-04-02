@@ -1,9 +1,12 @@
-# Finance Dashboard
+# FinSight - Financial Dashboard
 
-A comprehensive, responsive financial dashboard built with React and Vite. It provides users with powerful tools for tracking financial activity, managing transactions intuitively, and gaining insights through interactive data visualizations.
+🚀 **Live Demo:** [https://financial-dashboard-ui-fin-sight.vercel.app/](https://financial-dashboard-ui-fin-sight.vercel.app/)
+
+A comprehensive, responsive financial dashboard built with React and Vite. It provides users with powerful tools for tracking financial activity, managing transactions intuitively, and gaining intelligent insights through interactive data visualizations.
 
 ## Key Features
 
+- **Dynamic Natural Language Insights**: Contextual, smart insights that compare month-over-month expenses and automatically diagnose main categories causing spending changes.
 - **Dashboard Overview**: Track key financial metrics and view trends via high-level summary cards.
 - **Data Visualization**: Interactive and responsive charts (built with Recharts) to analyze spending patterns and categorical breakdowns.
 - **Transaction Management**: 
