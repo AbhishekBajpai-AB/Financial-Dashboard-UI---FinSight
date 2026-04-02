@@ -1,6 +1,6 @@
 # FinSight - Financial Dashboard
 
-🚀 **Live Demo:** [https://financial-dashboard-ui-fin-sight.vercel.app/](https://financial-dashboard-ui-fin-sight.vercel.app/)
+🚀 **Live Demo:** [LINK](https://financial-dashboard-ui-fin-sight.vercel.app/)
 
 A comprehensive, responsive financial dashboard built with React and Vite. It provides users with powerful tools for tracking financial activity, managing transactions intuitively, and gaining intelligent insights through interactive data visualizations.
 
@@ -16,6 +16,10 @@ A comprehensive, responsive financial dashboard built with React and Vite. It pr
 - **Export Data**: Download your filtered transactions directly as CSV or JSON files.
 - **Simulated Roles**: Switch between *Admin* (full access) and *Viewer* (read-only) roles seamlessly.
 - **Dark & Light Themes**: State-of-the-art UI supporting dynamic theme switching.
+
+## Snpashot
+
+
 
 ## Tech Stack
 
@@ -48,6 +52,7 @@ Ensure you have Node.js installed.
    npm run dev
    ```
 5. Open your browser and navigate to `http://localhost:5173/`.
+
 
 ## Usage & Navigation
 
