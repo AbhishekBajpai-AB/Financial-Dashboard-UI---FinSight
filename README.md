@@ -27,13 +27,13 @@ A comprehensive, responsive financial dashboard built with React and Vite. It pr
 ## Transaction - Admin Role
 
 <div align="center">
-  <img src="src/snapshot/Overview.png" alt="Overview" width="95%"/>       
+  <img src="src/snapshot/Transaction - Admin Role.png" alt="Transaction - Admin Role" width="95%"/>       
 </div>
 
 ## Transaction - Viewer Role
 
 <div align="center">
-  <img src="src/snapshot/Overview.png" alt="Overview" width="95%"/>       
+  <img src="src/snapshot/Transaction - Viewer Role.png" alt="Transaction - Viewer Role" width="95%"/>       
 </div>
 
 
