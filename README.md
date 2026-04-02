@@ -19,7 +19,9 @@ A comprehensive, responsive financial dashboard built with React and Vite. It pr
 
 ## Snpashot
 
-
+<div align="center">
+  <img src="./snapshot/Overview.png" alt="Overview" width="45%"/>
+</div>
 
 ## Tech Stack
 
