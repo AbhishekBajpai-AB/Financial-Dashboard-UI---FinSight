@@ -1,4 +1,4 @@
-# FinSight - Financial Dashboard
+## Financial-Dashboard UI---FinSight 
 
 🚀 **Live Demo:** [LINK](https://financial-dashboard-ui-fin-sight.vercel.app/)
 
@@ -79,3 +79,10 @@ Ensure you have Node.js installed.
 ## Customization
 
 You can selectively adjust primary UI aesthetics (such as light/dark palettes, fonts, and dimensions) by modifying the root variables available inside `src/index.css`.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+Made with ❤️ by Abhishek Bajpai
