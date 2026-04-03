@@ -1,14 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useFinance } from '../../context/FinanceContext';
-import { Search, Plus, Trash2, ArrowUpRight, ArrowDownRight, Inbox, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Plus, Trash2, ArrowUpRight, ArrowDownRight, Inbox, Download, ChevronLeft, ChevronRight, Edit } from 'lucide-react';
 import { format } from 'date-fns';
 
 export default function TransactionManager() {
-  const { transactions, role, addTransaction, deleteTransaction } = useFinance();
+  const { transactions, role, addTransaction, deleteTransaction, updateTransaction } = useFinance();
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [sortBy, setSortBy] = useState('date-desc');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -39,18 +40,35 @@ export default function TransactionManager() {
     return filteredTransactions.slice(startIndex, startIndex + rowsPerPage);
   }, [filteredTransactions, currentPage, rowsPerPage]);
 
-  const handleAdd = (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const newTxn = {
+    const txnData = {
       date: formData.get('date'),
       amount: Number(formData.get('amount')),
       category: formData.get('category'),
       type: formData.get('type'),
       description: formData.get('description'),
     };
-    addTransaction(newTxn);
+    
+    if (editingTransaction) {
+      updateTransaction({ ...txnData, id: editingTransaction.id });
+    } else {
+      addTransaction(txnData);
+    }
+    
     setIsModalOpen(false);
+    setEditingTransaction(null);
+  };
+
+  const openAddModal = () => {
+    setEditingTransaction(null);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (t) => {
+    setEditingTransaction(t);
+    setIsModalOpen(true);
   };
 
   const exportCSV = () => {
@@ -125,7 +143,7 @@ export default function TransactionManager() {
               <Download size={18} /> JSON
             </button>
             {role === 'Admin' && (
-              <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
+              <button className="btn btn-primary" onClick={openAddModal}>
                 <Plus size={18} /> Add Transaction
               </button>
             )}
@@ -157,8 +175,11 @@ export default function TransactionManager() {
                       </div>
                     </td>
                     {role === 'Admin' && (
-                      <td className="action-col">
-                        <button className="btn-icon danger" onClick={() => deleteTransaction(t.id)}>
+                      <td className="action-col" style={{ whiteSpace: 'nowrap' }}>
+                        <button className="btn-icon" onClick={() => openEditModal(t)} title="Edit">
+                          <Edit size={16} />
+                        </button>
+                        <button className="btn-icon danger" onClick={() => deleteTransaction(t.id)} title="Delete">
                           <Trash2 size={16} />
                         </button>
                       </td>
@@ -239,24 +260,24 @@ export default function TransactionManager() {
       {isModalOpen && role === 'Admin' && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>Add New Transaction</h2>
-            <form onSubmit={handleAdd}>
+            <h2>{editingTransaction ? 'Edit Transaction' : 'Add New Transaction'}</h2>
+            <form onSubmit={handleSave}>
               <div className="form-group">
                 <label>Date</label>
-                <input type="date" name="date" required defaultValue={new Date().toISOString().split('T')[0]} />
+                <input type="date" name="date" required defaultValue={editingTransaction ? new Date(editingTransaction.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} />
               </div>
               <div className="form-group">
                 <label>Description</label>
-                <input type="text" name="description" required placeholder="e.g. Grocery Store" />
+                <input type="text" name="description" required placeholder="e.g. Grocery Store" defaultValue={editingTransaction?.description || ''} />
               </div>
               <div className="form-row">
                 <div className="form-group">
                   <label>Amount</label>
-                  <input type="number" name="amount" min="0" step="0.01" required placeholder="0.00" />
+                  <input type="number" name="amount" min="0" step="0.01" required placeholder="0.00" defaultValue={editingTransaction?.amount || ''} />
                 </div>
                 <div className="form-group">
                   <label>Type</label>
-                  <select name="type" required>
+                  <select name="type" required defaultValue={editingTransaction?.type || 'expense'}>
                     <option value="expense">Expense</option>
                     <option value="income">Income</option>
                   </select>
@@ -264,10 +285,10 @@ export default function TransactionManager() {
               </div>
               <div className="form-group">
                 <label>Category</label>
-                <input type="text" name="category" required placeholder="e.g. Food" />
+                <input type="text" name="category" required placeholder="e.g. Food" defaultValue={editingTransaction?.category || ''} />
               </div>
               <div className="modal-actions">
-                <button type="button" className="btn btn-secondary" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                <button type="button" className="btn btn-secondary" onClick={() => { setIsModalOpen(false); setEditingTransaction(null); }}>Cancel</button>
                 <button type="submit" className="btn btn-primary">Save Transaction</button>
               </div>
             </form>

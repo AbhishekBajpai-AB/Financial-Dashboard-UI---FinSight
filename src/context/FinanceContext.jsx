@@ -61,6 +61,11 @@ export function FinanceProvider({ children }) {
     setTransactions(prev => prev.filter(t => t.id !== id));
   };
 
+  const updateTransaction = (updatedTxn) => {
+    if (role !== 'Admin') return;
+    setTransactions(prev => prev.map(t => t.id === updatedTxn.id ? updatedTxn : t));
+  };
+
   const value = {
     transactions,
     isLoading,
@@ -71,7 +76,8 @@ export function FinanceProvider({ children }) {
     theme,
     toggleTheme,
     addTransaction,
-    deleteTransaction
+    deleteTransaction,
+    updateTransaction
   };
 
   return <FinanceContext.Provider value={value}>{children}</FinanceContext.Provider>;

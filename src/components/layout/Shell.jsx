@@ -24,13 +24,13 @@ export default function Shell({ children, activeTab, setActiveTab }) {
           <h2>FinSight</h2>
         </div>
         <nav className="sidebar-nav">
-          <button 
+          <button
             className={`nav-btn ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
             <LayoutDashboard size={20} /> Overview
           </button>
-          <button 
+          <button
             className={`nav-btn ${activeTab === 'transactions' ? 'active' : ''}`}
             onClick={() => setActiveTab('transactions')}
           >
@@ -38,7 +38,7 @@ export default function Shell({ children, activeTab, setActiveTab }) {
           </button>
         </nav>
       </aside>
-      
+
       <main className="main-content">
         <header className="topbar">
           <div className="topbar-left">
@@ -52,31 +52,31 @@ export default function Shell({ children, activeTab, setActiveTab }) {
               <span className="role-icon">
                 {role === 'Admin' ? <ShieldAlert size={18} className="admin-icon" /> : <Shield size={18} />}
               </span>
-                <div className="custom-dropdown-container" ref={dropdownRef}>
-                  <button 
-                    className="custom-dropdown-button"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                  >
-                    {role} Role
-                    <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
-                  </button>
-                  {dropdownOpen && (
-                    <div className="custom-dropdown-menu">
-                      <button 
-                        className={`custom-dropdown-item ${role === 'Viewer' ? 'active' : ''}`}
-                        onClick={() => { setRole('Viewer'); setDropdownOpen(false); }}
-                      >
-                        <Shield size={16} /> Viewer
-                      </button>
-                      <button 
-                        className={`custom-dropdown-item ${role === 'Admin' ? 'active' : ''}`}
-                        onClick={() => { setRole('Admin'); setDropdownOpen(false); }}
-                      >
-                        <ShieldAlert size={16} className="admin-icon" /> Admin
-                      </button>
-                    </div>
-                  )}
-                </div>
+              <div className="custom-dropdown-container" ref={dropdownRef}>
+                <button
+                  className="custom-dropdown-button"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  {role} Role
+                  <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
+                </button>
+                {dropdownOpen && (
+                  <div className="custom-dropdown-menu">
+                    <button
+                      className={`custom-dropdown-item ${role === 'Viewer' ? 'active' : ''}`}
+                      onClick={() => { setRole('Viewer'); setDropdownOpen(false); }}
+                    >
+                      <Shield size={16} /> Viewer
+                    </button>
+                    <button
+                      className={`custom-dropdown-item ${role === 'Admin' ? 'active' : ''}`}
+                      onClick={() => { setRole('Admin'); setDropdownOpen(false); }}
+                    >
+                      <ShieldAlert size={16} className="admin-icon" /> Admin
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </header>
