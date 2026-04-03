@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useFinance } from '../../context/FinanceContext';
-import { LayoutDashboard, WalletCards, Moon, Sun, Shield, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, WalletCards, Moon, Sun, Shield, ShieldAlert, ChevronDown } from 'lucide-react';
 
 export default function Shell({ children, activeTab, setActiveTab }) {
   const { role, setRole, theme, toggleTheme, isLoading, error, fetchData } = useFinance();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="shell-container">
@@ -40,14 +52,31 @@ export default function Shell({ children, activeTab, setActiveTab }) {
               <span className="role-icon">
                 {role === 'Admin' ? <ShieldAlert size={18} className="admin-icon" /> : <Shield size={18} />}
               </span>
-              <select 
-                value={role} 
-                onChange={(e) => setRole(e.target.value)}
-                className="role-select"
-              >
-                <option value="Viewer">Viewer Role</option>
-                <option value="Admin">Admin Role</option>
-              </select>
+                <div className="custom-dropdown-container" ref={dropdownRef}>
+                  <button 
+                    className="custom-dropdown-button"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    {role} Role
+                    <ChevronDown size={14} style={{ transition: 'transform 0.2s', transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="custom-dropdown-menu">
+                      <button 
+                        className={`custom-dropdown-item ${role === 'Viewer' ? 'active' : ''}`}
+                        onClick={() => { setRole('Viewer'); setDropdownOpen(false); }}
+                      >
+                        <Shield size={16} /> Viewer
+                      </button>
+                      <button 
+                        className={`custom-dropdown-item ${role === 'Admin' ? 'active' : ''}`}
+                        onClick={() => { setRole('Admin'); setDropdownOpen(false); }}
+                      >
+                        <ShieldAlert size={16} className="admin-icon" /> Admin
+                      </button>
+                    </div>
+                  )}
+                </div>
             </div>
           </div>
         </header>
