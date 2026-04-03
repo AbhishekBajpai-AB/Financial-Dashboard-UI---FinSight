@@ -24,10 +24,18 @@ A comprehensive, responsive financial dashboard built with React and Vite. It pr
 </div>
 
 
+## Light Mode & Dark Mode
+
+<div align="center">
+  <img src="src/snapshot/Light Mode.png" alt="Light Mode" width="45%"/>
+  <img src="src/snapshot/Overview.png" alt="Dark Mode" width="45%"/>
+</div>
+
+
 ## Transaction - Admin Role
 
 <div align="center">
-  <img src="src/snapshot/Transaction - Admin Role.png" alt="Transaction - Admin Role" width="95%"/>       
+  <img src="src/snapshot/Transaction - Admin Role 1.png" alt="Transaction - Admin Role" width="95%"/>       
 </div>
 
 ## Transaction - Viewer Role
